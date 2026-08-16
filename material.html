@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>極秘資料 | オフライン</title>
+  <link rel="stylesheet" href="assets/css/material.css" />
+</head>
+
+<body>
+
+<!-- 端末ステータスバー -->
+<div class="header-bar">
+  <span>RESTRICTED FILE / LEVEL 3</span>
+  <span>端末ID: A-07</span>
+</div>
+
+<main class="material-wrapper">
+
+  <!-- タイトル（PHASE2でRGBズレ） -->
+  <h1 class="glitch-title" data-text="研究結果">研究結果</h1>
+
+  <p class="material-desc">
+    本資料は閲覧制限が設定されています。</p>
+
+  <!-- ============================
+       内部マニュアル
+  ============================ -->
+  <section class="material-section">
+    <h2 class="glitch-sub" data-text="内部マニュアル">内部マニュアル</h2>
+
+    <ul class="manual-list">
+      <li>依頼内容の初期解析</li>
+      <li>対象者データとの照合</li>
+      <li>不一致データの抽出</li>
+      <li>報告ログの生成</li>
+    </ul>
+  </section>
+
+  <!-- ============================
+       データ管理
+  ============================ -->
+  <section class="material-section">
+    <h2 class="glitch-sub" data-text="データ管理">データ管理</h2>
+
+    <table class="material-table">
+      <tr><th>項目</th><th>状態</th><th>備考</th></tr>
+      <tr><td>依頼ログ</td><td>正常</td><td>暗号化済</td></tr>
+      <tr><td>照合データ</td><td>一部破損</td><td>復旧処理中</td></tr>
+      <tr><td>対象者情報</td><td>同期中</td><td>整合性チェック中</td></tr>
+    </table>
+  </section>
+
+  <!-- ============================
+       リッチ比較ビュー（TARGET vs INTERNAL DATA）
+  ============================ -->
+  <section class="material-section compare-rich">
+    <div class="compare-header">
+      <span>SCAN MODULE / V-02</span>
+      <span>STATUS: ACTIVE</span>
+    </div>
+
+    <h2 class="glitch-sub" data-text="照合比較">照合比較</h2>
+
+    <div class="compare-rich-wrapper">
+
+      <!-- 左：対象者 -->
+      <div class="compare-panel">
+        <div class="panel-label">TARGET</div>
+        <img src="assets/images/customer-sample.png" class="compare-img" alt="対象者写真">
+      </div>
+
+      <!-- 中央：スキャンライン＋適合率 -->
+      <div class="compare-center">
+        <div class="scan-line"></div>
+        <p class="compare-rate-label">適合率</p>
+        <p id="compareRate" class="compare-rate">--%</p>
+      </div>
+
+      <!-- 右：内部データ -->
+      <div class="compare-panel">
+        <div class="panel-label">INTERNAL DATA</div>
+        <img src="assets/images/customer-sample.png" class="compare-img" alt="内部データ写真">
+      </div>
+
+    </div>
+
+    <pre id="compareLog" class="system-log compare-log">
+[LOG] 照合プロセスを開始しています…
+    </pre>
+  </section>
+
+  <!-- ============================
+       内部ログ
+  ============================ -->
+  <section class="material-section">
+    <h2 class="glitch-sub" data-text="内部ログ">内部ログ</h2>
+
+    <pre class="system-log">
+[09:12] データ照合開始  
+[09:13] 対象者情報の同期  
+[09:14] ---- 不一致データ検出 ----  
+[09:15] 追加解析の必要性：高  
+    </pre>
+  </section>
+  
+<div class="command-panel">
+  <div class="command-label">EXECUTE COMMAND</div>
+  <button id="toFormBtn" class="terminal-command-btn">
+    照合を続行する
+    <span class="command-scanline"></span>
+  </button>
+</div>
+
+
+</main>
+
+<script src="assets/js/material.js"></script>
+</body>
+</html>

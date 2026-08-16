@@ -1,0 +1,356 @@
+/* ============================
+   Base（無機質・退廃・研究端末）
+============================ */
+body {
+  font-family: "Noto Sans JP", sans-serif;
+  background: #1A1A1A;
+  color: #E6E6E6;
+  margin: 0;
+  padding: 40px;
+  letter-spacing: 0.4px;
+}
+
+/* 端末ステータスバー */
+.header-bar {
+  background: #111;
+  color: #CFCFCF;
+  padding: 8px 12px;
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #333;
+}
+
+.material-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* ============================
+   Section（端末ウィンドウ）
+============================ */
+.material-section {
+  margin-top: 48px;
+  background: #202020;
+  border: 1px solid #3A3A3A;
+  padding: 32px;
+  border-radius: 0;
+  box-shadow: 0 0 0 1px #2A2A2A inset;
+}
+
+.material-section h2 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #E6E6E6;
+  border-bottom: 1px solid #3A3A3A;
+  padding-bottom: 4px;
+  letter-spacing: 1px;
+}
+
+/* ============================
+   Description
+============================ */
+.material-desc {
+  font-size: 14px;
+  color: #CFCFCF;
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+/* ============================
+   Images（無機質・端末表示）
+============================ */
+.material-img {
+  width: 100%;
+  border-radius: 0;
+  margin: 16px 0;
+  border: 1px solid #3A3A3A;
+  filter: grayscale(60%) contrast(120%);
+}
+
+/* ============================
+   Table（研究データ表）
+============================ */
+.material-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  background: #181818;
+  border: 1px solid #3A3A3A;
+}
+
+.material-table th,
+.material-table td {
+  border-bottom: 1px solid #3A3A3A;
+  padding: 10px;
+  font-size: 13px;
+}
+
+.material-table th {
+  background: #222;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* ============================
+   Case Study（研究ログ）
+============================ */
+.case-box {
+  background: #181818;
+  border-left: 3px solid #555;
+  padding: 16px;
+  margin: 16px 0;
+  border-radius: 0;
+}
+
+.case-box h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+/* ============================
+   System Log（端末ログ）
+============================ */
+.system-log {
+  background: #000;
+  color: #CFCFCF;
+  padding: 16px;
+  border-radius: 0;
+  font-family: monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  margin-top: 16px;
+  letter-spacing: 0.8px;
+}
+
+/* ============================
+   Rich Comparison View
+============================ */
+.compare-rich {
+  margin-top: 48px;
+  background: #111;
+  border: 1px solid #333;
+  padding: 32px;
+  box-shadow: 0 0 0 1px #222 inset;
+}
+
+/* 端末のステータスバー */
+.compare-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #AAA;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 6px;
+  letter-spacing: 1px;
+}
+
+/* 写真＋中央の適合率を並べる */
+.compare-rich-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 200px 1fr;
+  gap: 32px;
+  align-items: center;
+}
+
+/* 左右のパネル */
+.compare-panel {
+  background: #181818;
+  border: 1px solid #333;
+  padding: 16px;
+  position: relative;
+}
+
+.panel-label {
+  position: absolute;
+  top: -12px;
+  left: 0;
+  background: #222;
+  padding: 2px 6px;
+  font-size: 11px;
+  color: #AAA;
+  letter-spacing: 1px;
+}
+
+.compare-img {
+  width: 100%;
+  border: 1px solid #444;
+  filter: grayscale(70%) contrast(130%);
+}
+
+/* 中央の適合率パネル */
+.compare-center {
+  text-align: center;
+  background: #0D0D0D;
+  border: 1px solid #333;
+  padding: 20px 0;
+  position: relative;
+}
+
+/* スキャンライン（演出） */
+.scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background: #00FFFF;
+  animation: scanMove 2.5s linear infinite;
+  opacity: 0.4;
+}
+
+@keyframes scanMove {
+  0% { top: 0; }
+  100% { top: 100%; }
+}
+
+.compare-rate-label {
+  font-size: 12px;
+  color: #AAA;
+  letter-spacing: 1px;
+}
+
+.compare-rate {
+  font-size: 36px;
+  font-weight: 700;
+  color: #E6E6E6;
+  letter-spacing: 2px;
+  margin-top: 6px;
+}
+
+/* ログ */
+.compare-log {
+  margin-top: 24px;
+}
+
+/* ============================
+   PHASE2：RGBズレ（端末の信号乱れ）
+============================ */
+.glitch-title,
+.glitch-sub {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch-title::before,
+.glitch-title::after,
+.glitch-sub::before,
+.glitch-sub::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.glitch-title::before,
+.glitch-sub::before {
+  color: #00FFFF;
+  transform: translate(1px, 0);
+}
+
+.glitch-title::after,
+.glitch-sub::after {
+  color: #FF4040;
+  transform: translate(-1px, 0);
+}
+
+/* ============================
+   PHASE2：画像破損
+============================ */
+.phase2-img-broken {
+  filter: grayscale(100%) contrast(150%) blur(1px);
+  opacity: 0.85;
+}
+
+/* ============================
+   PHASE2：警告バー
+============================ */
+.phase2-alert {
+  background: #330000;
+  color: #FFBABA;
+  padding: 12px;
+  text-align: center;
+  font-size: 13px;
+  border-bottom: 1px solid #550000;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  letter-spacing: 0.5px;
+}
+
+.phase2-alert.show {
+  opacity: 1;
+}
+
+/* ============================
+   COMMAND PANEL（端末の指令パネル）
+============================ */
+.command-panel {
+  margin-top: 32px;
+  background: #0D0D0D;
+  border: 1px solid #333;
+  padding: 20px;
+  position: relative;
+  box-shadow: 0 0 0 1px #222 inset;
+}
+
+.command-label {
+  position: absolute;
+  top: -12px;
+  left: 0;
+  background: #222;
+  padding: 2px 6px;
+  font-size: 11px;
+  color: #AAA;
+  letter-spacing: 1px;
+}
+
+/* ============================
+   COMMAND BUTTON（端末の指令ボタン）
+============================ */
+.terminal-command-btn {
+  width: 100%;
+  background: #111;
+  color: #E6E6E6;
+  border: 1px solid #444;
+  padding: 14px 20px;
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.terminal-command-btn:hover {
+  background: #1A1A1A;
+  border-color: #00FFFF;
+}
+
+/* スキャンライン演出 */
+.command-scanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background: #00FFFF;
+  opacity: 0.4;
+  animation: commandScan 2.2s linear infinite;
+}
+
+@keyframes commandScan {
+  0% { top: 0; }
+  100% { top: 100%; }
+}
+
+/* クリック時のノイズ演出 */
+.terminal-command-btn:active {
+  filter: contrast(140%) brightness(120%);
+}
+

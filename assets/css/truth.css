@@ -1,0 +1,431 @@
+/* ============================
+   全体（PC）
+============================ */
+.doc-body {
+  background: #f4f5f7;
+  font-family: "Noto Sans JP", sans-serif;
+  color: #1a1d21;
+  padding: 40px 0;
+}
+
+.doc-container {
+  background: #ffffff;
+  width: 900px;
+  margin: 0 auto;
+  padding: 40px 60px;
+  border: 1px solid #d4d7dc;
+  box-shadow: 0 0 40px rgba(0,0,0,0.08);
+  box-sizing: border-box;
+}
+
+/* ============================
+   ヘッダー（PC）
+============================ */
+.doc-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.doc-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.doc-sub {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.doc-meta-right p {
+  font-size: 13px;
+  color: #4b5563;
+  text-align: right;
+}
+
+.doc-divider {
+  border: none;
+  border-top: 1px solid #d4d7dc;
+  margin: 30px 0;
+}
+
+/* ============================
+   セクション（PC）
+============================ */
+.doc-section {
+  margin-bottom: 40px;
+}
+
+.doc-section h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.doc-section p {
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+/* ============================
+   揺れ演出
+============================ */
+.shake-word {
+  display: inline-block;
+  animation: shakeWord 0.35s infinite alternate;
+}
+
+@keyframes shakeWord {
+  0%   { transform: translate(0, 0); }
+  100% { transform: translate(1px, -1px); }
+}
+
+/* ============================
+   観察ブロック（PC）
+============================ */
+.doc-observe-block {
+  margin: 40px 0;
+  padding: 24px 28px;
+  background: #fafbfc;
+  border: 1px solid #e1e4e8;
+  border-radius: 4px;
+}
+
+.doc-observe-list p {
+  margin: 10px 0;
+  font-size: 15px;
+  color: #1f2937;
+  line-height: 1.8;
+}
+
+.doc-analysis-clean {
+  margin-top: 24px;
+  padding: 0 4px;
+}
+
+.doc-analysis-clean p {
+  font-size: 15px;
+  line-height: 1.9;
+  color: #1a1d21;
+}
+
+/* 四角ごと揺れる */
+.shake-box {
+  animation: shakeBox 0.45s infinite alternate;
+}
+
+@keyframes shakeBox {
+  0%   { transform: translate(0, 0); }
+  100% { transform: translate(1px, -1px); }
+}
+
+/* ============================
+   テレビノイズ
+============================ */
+.glitch-shift {
+  position: relative;
+  animation: shift 0.2s infinite;
+}
+
+@keyframes shift {
+  0%   { transform: translateX(0); }
+  50%  { transform: translateX(-2px); }
+  100% { transform: translateX(2px); }
+}
+
+.double-layer {
+  position: relative;
+}
+
+.doc-section .tv-noise-text .double-layer {
+  font-size: 18px;
+}
+
+.double-layer::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: rgb(100, 100, 100);
+  transform: translateY(2px);
+  opacity: 0.4;
+  animation: lag 0.3s infinite alternate;
+}
+
+@keyframes lag {
+  0% { transform: translateY(2px); }
+  100% { transform: translateY(-2px); }
+}
+
+/* ============================
+   規約（PC）
+============================ */
+.terms-item {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #333;
+  margin: 12px 0;
+  display: flex;
+  gap: 8px;
+}
+
+.terms-number {
+  font-weight: bold;
+  color: #555;
+  min-width: 60px;
+}
+
+.terms-text {
+  flex: 1;
+  color: #222;
+}
+
+/* ============================
+   承認（PC）
+============================ */
+.auto-fill {
+  position: relative;
+}
+
+
+@keyframes autofill {
+  0% { opacity: 0; }
+  80% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* ============================
+   ボタン（PC）
+============================ */
+.arg-button {
+  margin-top: 20px;
+  padding: 12px 24px;
+  background: #222;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* ============================
+   ★ 中間幅（600〜900px）
+============================ */
+@media (max-width: 900px) and (min-width: 601px) {
+
+  .doc-container {
+    width: 100%;
+    max-width: 100%;
+    padding: 32px 24px;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  .doc-header {
+    display: block;
+    text-align: left;
+  }
+
+  .doc-title {
+    font-size: 24px;
+    margin-bottom: 6px;
+  }
+
+  .doc-meta-right p {
+    text-align: left;
+    margin-top: 6px;
+  }
+
+  .doc-section {
+    margin-bottom: 36px;
+  }
+
+  .doc-section h2 {
+    font-size: 19px;
+  }
+
+  .doc-section p {
+    font-size: 15px;
+    line-height: 1.85;
+    word-break: break-word;
+  }
+
+  .terms-item {
+    display: block;
+    margin-bottom: 18px;
+  }
+
+  .terms-number {
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .arg-button {
+    width: 100%;
+    padding: 14px 0;
+    font-size: 16px;
+  }
+}
+
+/* ============================
+   ★ SP（600px以下）
+============================ */
+@media (max-width: 600px) {
+
+  .doc-body {
+    padding: 20px 0;
+  }
+
+  .doc-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 20px 16px !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .doc-header {
+    display: block;
+    text-align: left;
+  }
+
+  .doc-title {
+    font-size: 22px;
+    margin-bottom: 4px;
+  }
+
+  .doc-meta-right p {
+    text-align: left;
+    margin-top: 8px;
+    font-size: 12px;
+  }
+
+  .doc-section {
+    margin-bottom: 28px !important;
+  }
+
+  .doc-section h2 {
+    font-size: 18px !important;
+  }
+
+  .doc-section p {
+    font-size: 14px !important;
+    line-height: 1.8 !important;
+    word-break: break-word !important;
+  }
+
+  .doc-observe-block {
+    padding: 20px !important;
+  }
+
+  .terms-item {
+    display: block !important;
+    margin-bottom: 20px !important;
+  }
+
+  .terms-number {
+    display: block !important;
+    margin-bottom: 4px !important;
+  }
+
+  .doc-approval p {
+    font-size: 14px !important;
+  }
+
+  .arg-line {
+    width: 100% !important;
+  }
+
+  .arg-button {
+    width: 100% !important;
+    padding: 14px 0 !important;
+    font-size: 16px !important;
+  }
+}
+
+/* ============================
+   ★ 内部要素の安定化（崩れゼロ化）
+============================ */
+@media (max-width: 1200px) {
+
+  .doc-container,
+  .doc-header,
+  .doc-meta-left,
+  .doc-meta-right,
+  .doc-section,
+  .doc-observe-block,
+  .doc-observe-list,
+  .doc-analysis-clean,
+  .terms-item,
+  .terms-number,
+  .terms-text,
+  .doc-approval,
+  .approval-box,
+  .arg-button,
+  button {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow-wrap: break-word !important;
+  }
+
+  .doc-header {
+    display: block !important;
+  }
+
+  .terms-item {
+    display: block !important;
+  }
+}
+
+/* ============================
+   演出
+============================ */
+
+#analysisOverlay {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0,0,0,0.45) !important;
+  backdrop-filter: blur(2px);
+
+  z-index: 999999 !important;
+  pointer-events: all;
+}
+
+#verticalGlitch {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  width: 2px;
+  height: 100vh;
+  background: rgba(31, 31, 31, 0.8);
+  opacity: 0;
+  z-index: 999999;
+  pointer-events: none;
+}
+@keyframes glitchLine {
+  0% { opacity: 0; }
+  20% { opacity: 1; transform: translateX(-10px); }
+  40% { transform: translateX(10px); }
+  60% { transform: translateX(-5px); }
+  80% { transform: translateX(5px); }
+  100% { opacity: 0; }
+}
+
+.multiGlitch {
+  position: fixed;
+  top: 0;
+  width: 2px;
+  height: 100vh;
+  background: rgba(255,255,255,0.8);
+  opacity: 0;
+  z-index: 999999;
+  pointer-events: none;
+}
