@@ -40,6 +40,11 @@ function startAnalysis() {
   const overlay = document.getElementById("analysisOverlay");
   const logBox = document.getElementById("analysisLog");
 
+  // JS側からもフォント（Hedvig Letters Serif / Noto Serif JP）を明示的に指定
+  if (logBox) {
+    logBox.style.fontFamily = '"Hedvig Letters Serif", "Noto Serif JP", serif';
+  }
+
   overlay.style.display = "flex";
   logBox.textContent = "";
 
@@ -52,24 +57,28 @@ function startAnalysis() {
       setTimeout(showNext, 80 + Math.random() * 120); // 高速＆揺らぎ
     } else {
       // ▼ ① 解析ウィンドウのフェードアウト
-      document.getElementById("analysisWindow").style.animation =
-        "analysisFadeOut 0.6s forwards";
-
-      // ▼ ② 複数縦ノイズを発生させる（ここがクライマックス）
-      spawnMultipleGlitches(6); // ← 好きな本数に変更OK
-
-      // ▼ ③ ノイズ後に遷移
       setTimeout(() => {
-        overlay.style.display = "none";
-        proceedToNextPhase();
-      }, 700);
+        overlay.style.transition = "opacity 0.6s ease";
+        overlay.style.opacity = "0";
+
+        // ▼ ② フェードアウト後に次へ遷移
+        setTimeout(() => {
+          proceedToNextPhase();
+        }, 600);
+      }, 800);
     }
   }
 
   showNext();
 }
 
-// ▼ ボタン押下で解析ログを開始
-document.getElementById("startServiceBtn").addEventListener("click", () => {
-  startAnalysis();
+// イベントリスナーの登録
+document.addEventListener("DOMContentLoaded", () => {
+  const startBtn = document.getElementById("startServiceBtn");
+  if (startBtn) {
+    startBtn.addEventListener("click", () => {
+      spawnMultipleGlitches(10);
+      startAnalysis();
+    });
+  }
 });

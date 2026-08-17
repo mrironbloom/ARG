@@ -1,327 +1,515 @@
 /* =========================================================
-   基本設定（フォント・背景・文字色）
+   1. 基本設定（フォント・ダーク統一背景）
 ========================================================= */
 body {
-  font-family: "Noto Sans JP", sans-serif;
-  background: #f5f7fb;
-  color: #1a2a4a;
+  font-family: "Noto Serif Japanese", "Hedvig Letters Serif", serif;
+  background-color: #1e293b !important; /* 予備背景も深みのあるネイビーで統一 */
+  color: #f8fafc;
   margin: 0;
   line-height: 1.8;
 }
 
-/* セクション共通設定 */
 section {
   width: 100%;
   box-sizing: border-box;
 }
 
+/* ★修正：途中で白くならず、上から下まで深みのあるダークグラデーション */
 .content-gradient {
-  background: linear-gradient(
-    180deg,
-    #333D49 0%,     /* 起点：青みダークグレー */
-    #3F4A57 20%,    /* 少し明るい青グレー */
-    #556579 45%,    /* 壁の明るい部分に近い青 */
-    #C9D4E3 70%,    /* 画像の光が当たる淡いブルー */
-    #E8F0FA 85%,    /* さらに明るいブルー（窓の光） */
-    #FFFFFF 100%    /* カードと自然に接続する白 */
-  );
+  width: 100%;
+  min-height: 100vh;
+  /* ドット模様とグラデーションを正しく重ね合わせる指定 */
+  background-image: 
+    radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 0),
+    linear-gradient(
+      180deg,
+      #353F4B 0%,     /* 上部：淡いネイビーグレー */
+      #414C5A 35%,    /* 中間：深いネイビー */
+      #4F5B6C 70%,    /* 下部：ダークトーン */
+      #5E6B7C 100%    /* 最下部：ほぼ黒のネイビー */
+    ) !important;
+  background-size: 24px 24px, 100% 100% !important;
+  background-repeat: repeat, no-repeat !important;
+  position: relative;
 }
 
-
+/* 各セクションの背景を透過させてグラデーションを見せる */
 .service,
 .scenes,
 .features,
 .price,
 .reviews,
 .cta {
-  background: transparent;
+  background: transparent !important;
+}
+
+.service-inner,
+.scenes-inner,
+.features-inner,
+.price-inner,
+.reviews-inner,
+.cta-inner,
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
 }
 
 /* =========================================================
-   Header
+   2. ヘッダー・ナビゲーション（レスポンシブ対応）
 ========================================================= */
-.header {
+.global-header {
   width: 100%;
   background: #ffffff;
   border-bottom: 1px solid #e5e8ef;
-  padding: 12px 32px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-
-  box-sizing: border-box;
   position: sticky;
   top: 0;
   z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
 }
 
-/* 左ブロック（ロゴ＋サブコピー） */
-.header-left {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-
-  min-width: 180px;
-  flex-shrink: 0;
-}
-
-.logo {
-  font-size: 20px;
-  font-weight: 700;
-  color: #1a2a4a;
-  white-space: nowrap;
-}
-
-.subcopy {
-  font-size: 13px;
-  color: #6b7280;
-  white-space: nowrap;
-}
-
-/* 右側ステータス（右端固定） */
-#staffStatus {
-  font-size: 14px;
-  font-weight: 600;
-  color: #1a2a4a;
-  white-space: nowrap;
-
-  flex-shrink: 0;
-  margin-left: auto;
-}
-
-/* 左側：ロゴ */
-.header-left {
+.global-header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 24px;
   display: flex;
   align-items: center;
-  flex-shrink: 0;
-  min-width: 0;
+  justify-content: space-between;
 }
 
-
-/* ロゴ画像 */
-.header-logo {
+.gh-logo {
+  height: 48px;
+  width: auto;
   display: block;
-  width: 200px;
-  height: auto;
-  max-height: none;
-  object-fit: contain;
+}
+
+.gh-action-area {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* リセットボタン */
+.gh-reset-btn {
+  padding: 8px 16px;
+  background: #37414d;
+  border-radius: 6px;
+  color: #ffffff !important;
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.25s ease;
+}
+
+.gh-reset-btn:hover {
+  background: #1f2937;
+}
+
+/* PCナビゲーション */
+.gh-nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-left: auto;
+  margin-right: 24px;
+}
+
+.gh-nav a {
+  color: #334155;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  transition: color 0.25s ease;
+}
+
+.gh-nav a:hover {
+  color: #1d86a2;
+}
+
+/* PC時はハンバーガーボタンとスマホ用メニューを非表示 */
+.gh-hamburger,
+.gh-nav-mobile {
+  display: none;
+}
+
+/* スマホ表示 (768px 以下) */
+@media screen and (max-width: 768px) {
+  .global-header-inner {
+    padding: 10px 16px;
+  }
+
+  .gh-logo {
+    height: 32px;
+  }
+
+  .gh-nav {
+    display: none;
+  }
+
+  .gh-hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    z-index: 1001;
+  }
+
+  .gh-hamburger span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: #1a2a4a;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  .gh-nav-mobile {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e8ef;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 999;
+  }
+
+  .gh-nav-mobile.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .gh-nav-mobile a {
+    padding: 14px 24px;
+    color: #334155;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    border-top: 1px solid #f1f5f9;
+  }
 }
 
 /* =========================================================
-   SP（768px以下）
+   3. HERO セクション ＆ バッジ装飾
 ========================================================= */
-@media (max-width: 768px) {
-  .header {
-    flex-direction: row;      /* ← 縦並びにしない */
-    align-items: center;      /* ← 高さ揃え */
-    justify-content: space-between; /* ← 左右に配置 */
-    padding: 12px 20px;       /* ← スマホ用に少しコンパクト */
-    gap: 12px;                /* ← 詰める */
-  }
-
-  .header-left {
-    flex-direction: row;      /* ← ロゴ＋サブコピーを横並びに */
-    align-items: center;
-    gap: 8px;
-  }
-
-  #staffStatus {
-    margin-left: 0;           /* ← 左右配置なので不要 */
-    margin-top: 0;
-    white-space: nowrap;      /* ← 折り返し防止 */
-  }
-}
-
-/* =========================================================
-   HERO
-========================================================= */
-
 .hero {
   width: 100%;
-  height: 520px; /* ★高さは自由に調整可能 */
-  background-image: url("../images/hero.png"); /* ★あなたの画像パス */
-  background-size: cover;       /* ★全面に広げる */
-  background-position: center;  /* ★中央に配置 */
+  height: 520px;
+  background-image: url("../images/hero.png");
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
   position: relative;
 }
 
-/* 黒の薄いオーバーレイ（高級感UP） */
 .hero-overlay {
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.35); /* ★濃さは調整可能 */
+  background: rgba(0, 0, 0, 0.35);
   display: flex;
   align-items: center;
 }
 
-/* テキストを中央寄せにする */
 .hero-inner {
   max-width: 900px;
   margin: 0 auto;
   padding: 0 32px;
-  color: #ffffff; /* ★白文字に変更 */
+  color: #ffffff;
 }
 
-/* ラベル */
-.hero-label {
-  font-size: 14px;
-  letter-spacing: 0.16em;
-  margin-bottom: 12px;
-  opacity: 0.9;
+/* HERO信頼バッジ（あしらい） */
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
-/* 見出し */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
 .hero-inner h1 {
   font-size: 48px;
   font-weight: 800;
   line-height: 1.3;
   margin-bottom: 24px;
   position: relative;
+  text-shadow: 0 4px 12px rgba(0,0,0,0.35), 0 0 2px rgba(0,0,0,0.25);
 }
 
-.hero-inner h1,
-.hero-inner .hero-sub {
-  text-shadow:
-    0 4px 12px rgba(0,0,0,0.35),
-    0 0 2px rgba(0,0,0,0.25);
-}
-
-/* 下線（白に変更） */
-.hero-inner h1::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -10px;
-  width: 90px;
-  height: 4px;
-  background: #ffffff;
-  border-radius: 3px;
-}
-
-/* サブテキスト */
 .hero-sub {
   font-size: 20px;
   line-height: 1.9;
   opacity: 0.9;
   max-width: 560px;
+  text-shadow: 0 4px 12px rgba(0,0,0,0.35);
 }
 
 /* =========================================================
-   サービス説明
+   4. セクション共通見出し（あしらい線追加）
+========================================================= */
+.section-en {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: #e2e8f0 !important;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.section-en::before,
+.section-en::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #e2e8f0 !important;
+  opacity: 0.4;
+}
+
+.service-title,
+.scenes-title,
+.features-title,
+.price-title,
+.reviews-title,
+.cta-title {
+  position: relative;
+  display: block;             /* inline-block から block に変更 */
+  width: fit-content;         /* 文字幅に合わせる */
+  margin: 0 auto 32px;        /* 上 0 / 左右 自動（中央揃え）/ 下 32px */
+  padding-bottom: 12px;
+  font-size: 32px;
+  font-weight: 700;
+  color: #ffffff !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5) !important;
+  text-align: center;
+}
+
+/* 見出し下のグラデーション装飾線 */
+.service-title::after,
+.scenes-title::after,
+.features-title::after,
+.price-title::after,
+.reviews-title::after,
+.cta-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(90deg, #145a6d, #39b3e7);
+  border-radius: 2px;
+}
+
+/* =========================================================
+   5. ABOUT（サービス説明）＆ 数値実績エリア
 ========================================================= */
 .service {
-  padding: 100px 0;
+  padding: 100px 0 60px;
   text-align: center;
-  background: transparent;  /* ★背景色を追加（特徴と同系統） */
-  border-top: 1px solid #e5e8ef; /* ★HEROとの境界を自然に */
 }
 
 .service-inner {
-  max-width: 900px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 60px 40px !important;
+  max-width: 1000px !important;
   margin: 0 auto;
-  padding: 0 24px;
 }
 
-/* 見出し */
-.service-title {
-  font-size: 32px;
-  font-weight: 700;
-  color: #DEEAFF;
-  margin-bottom: 24px;
-  padding-bottom: 12px;
-  position: relative;
-  display: inline-block;
-}
-
-/* 見出し下のライン（控えめ） */
-.service-title::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 0;
-  width: 48px;
-  height: 3px;
-  background: #DEEAFF;
-  border-radius: 3px;
-}
-
-/* リード文 */
 .service-lead {
-  font-size: 18px;
-  color: #A1B2CD;
-  margin-bottom: 20px;
+  font-size: 19px;
+  color: #e2e8f0 !important;
+  font-weight: 600;
+  margin-bottom: 24px;
+  line-height: 1.8;
 }
 
-/* 本文 */
 .service-body {
-  font-size: 16px;
-  color: #A1B2CD;
-  max-width: 640px;
+  font-size: 15px;
+  color: #cbd5e1 !important;
+  max-width: 680px;
   margin: 0 auto 40px;
+  line-height: 1.9;
 }
 
-/* 画像 */
 .service-img img {
   width: 100%;
   max-width: 600px;
   border-radius: 20px;
   display: block;
   margin: 0 auto;
-  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* ★修正：数値実績カウンター（暗い背景で浮き上がるカード） */
+.stats-container {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 48px;
+  flex-wrap: wrap;
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.07) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 16px;
+  padding: 24px 32px;
+  min-width: 160px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25) !important;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: #38bdf8 !important;
+}
+
+.stat-number {
+  font-size: 38px;
+  font-weight: 800;
+  color: #ffffff !important;
+  text-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+  line-height: 1;
+  margin-bottom: 8px;
+  font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+.stat-unit {
+  font-size: 18px;
+  font-weight: 700;
+  margin-left: 2px;
+  color: #38bdf8 !important;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: #94a3b8 !important;
+  font-weight: 600;
+  letter-spacing: 0.08em;
 }
 
 /* =========================================================
-   利用シーン（画像なしカード）
+   6. SCENES ＆ FEATURES カード
 ========================================================= */
+.scenes { padding: 60px 0 30px; }
+.features { padding: 80px 0 40px; }
 
-/* 利用シーン（画像なしカード） */
+.scenes-grid,
+.features-grid {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* ★修正：利用シーンカード（ダーク調背景で白文字がはっきり読める） */
 .scene-item {
-  background: #ffffff;
-  border: 1px solid #e5e8ef;
-  border-radius: 12px;
-  padding: 24px 24px;        /* ★特徴と同じ余白に揃える */
-  box-shadow: 0 6px 20px rgba(0,0,0,0.04);
+  position: relative;
+  width: 100%;
+  max-width: 270px;
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 16px;
+  padding: 28px 24px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   text-align: center;
-  width: 280px;              /* ★特徴と同じ幅に揃える */
   margin: 0 auto;
 }
 
-/* 見出し（中央寄せ） */
+.scene-item::before {
+  content: "SCENE";
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.25) !important;
+}
+
+.scene-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.35) !important;
+  border-color: #38bdf8 !important;
+}
+
 .scene-item h3 {
   margin: 0 0 12px;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
-  color: #1a2a4a;
-  text-align: center;
+  color: #ffffff !important;
 }
 
-/* 説明文 */
 .scene-item p {
-  text-align: center;
-  font-size: 15px;
-  color: #4b5b73;
+  font-size: 14px;
+  color: #cbd5e1 !important;
   line-height: 1.8;
+  margin: 0;
 }
 
-
-/* =========================================================
-   特徴（画像ありカード）
-========================================================= */
-
+/* 特徴カード */
 .feature-item {
+  position: relative;
   background: #ffffff;
   border: 1px solid #e5e8ef;
   border-radius: 12px;
-  padding: 0 0 24px;         /* ★画像ありなので上は0 */
-  box-shadow: 0 6px 20px rgba(0,0,0,0.04);
+  padding: 0 0 24px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
   text-align: center;
-  width: 280px;              /* ★利用シーンと幅を統一 */
+  width: 100%;
+  max-width: 320px;
   margin: 0 auto;
   overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.feature-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+  border-color: #38bdf8;
 }
 
 .feature-img {
@@ -336,187 +524,115 @@ section {
   font-size: 20px;
   font-weight: 700;
   color: #1a2a4a;
-  text-align: center;
 }
 
 .feature-item p {
-  text-align: center;
   padding: 0 24px;
   font-size: 15px;
   color: #4b5b73;
   line-height: 1.8;
+  margin: 0;
 }
 
-/* =========================================================
-   グリッド（利用シーン・特徴共通）
-========================================================= */
-.scenes {
-  padding: 60px 0 30px 0;   /* ★上下に余白を追加 */
-}
-
-.features {
-  padding: 80px 0 40px 0;   /* ★上下に余白を追加 */
-}
-
-.scenes-grid,
-.features-grid {
-  display: flex;
-  gap: 32px;
-  justify-content: center;   /* ★中央揃え */
-  align-items: flex-start;    /* ★高さのズレを吸収 */
-}
-
-.scenes-title,
-.features-title {
-  text-align: center;
-  font-size: 32px;
-  font-weight: 700;
-  color: #DEEAFF;
-  margin-bottom: 32px;
-}
-
-.scenes-inner,
-.features-inner {
-  max-width: 900px;   /* ★サービス説明と同じ幅に揃える */
-  margin: 0 auto;     /* ★中央に配置 */
-  padding: 0 24px;    /* ★左右の余白も統一 */
-}
-
-/* SP時：縦3列 */
 @media (max-width: 768px) {
   .scenes-grid,
   .features-grid {
     flex-direction: column;
     gap: 24px;
   }
-}
-
-@media (max-width: 768px) {
-  .scenes-inner {
-    max-width: 600px;   /* ★カードの中央寄せが安定する */
-    margin: 0 auto;     /* ★中央に配置 */
-    padding: 0 12px;    /* ★左右の余白を統一 */
-  }
-}
-
-@media (max-width: 768px) {
   .scene-item,
   .feature-item {
     width: 100%;
-    max-width: 400px;   /* ★スマホでちょうどいい幅 */
-    margin: 0 auto;     /* ★中央に吸い付く */
+    max-width: 400px;
   }
 }
 
-
 /* =========================================================
-   料金
+   7. PRICE（料金表・商用あしらい）
 ========================================================= */
-.price {
-  padding: 100px 0;
-}
+.price { padding: 100px 0; }
+.price-inner { text-align: center; }
 
-.price-inner {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 24px;
-  text-align: center;
-}
-
-.price-title {
-  font-size: 32px;
-  font-weight: 700;
-  color: #DEEAFF;
-  margin-bottom: 32px;
-}
-
-/* テーブル */
 .price-table {
   width: 100%;
   border-collapse: collapse;
   background: #ffffff;
-  border-radius: 12px;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 0 40px 6px rgba(15, 23, 42, 0.5);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  color: #1a2a4a;
 }
 
 .price-table th {
   background: #f1f5f9;
-  padding: 16px;
+  padding: 18px;
   font-size: 16px;
   font-weight: 700;
 }
 
 .price-table td {
-  padding: 16px;
+  padding: 18px;
   font-size: 15px;
   border-top: 1px solid #e3e8ef;
 }
 
+/* スタンダードプランのおすすめバッジ */
+.price-table tr:nth-child(3) {
+  background: rgba(29, 134, 162, 0.08);
+  font-weight: bold;
+}
 
+.price-table tr:nth-child(3) td:first-child::after {
+  content: "RECOMMENDED";
+  font-size: 10px;
+  background: #1d86a2;
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
 
 /* =========================================================
-   お客様の声
+   8. REVIEWS（お客様の声）
 ========================================================= */
-.reviews {
-  padding: 100px 0;
-}
-
-.reviews-title{
-    color: #ffffff;
-}
-
-.reviews-inner {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-
-.reviews-title {
-  font-size: 32px;
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-/* レビューリスト（カード間の余白を統一） */
+.reviews { padding: 100px 0; }
 .review-list {
   display: flex;
   flex-direction: column;
   gap: 32px;
 }
 
-/* レビューカード（高さを安定化） */
 .review-item {
   background: #ffffff;
-  border-radius: 12px;
+  border: 1px solid #e5e8ef;
+  border-radius: 14px;
   padding: 24px;
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
-
-  display: flex;              /* ★高さ揃えのため追加 */
-  flex-direction: column;     /* ★内部を縦並びに統一 */
-  gap: 16px;                  /* ★内部余白を統一 */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: #1a2a4a;
 }
 
-/* ヘッダー（画像＋名前） */
 .review-header {
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-/* 画像（高さが潰れないように固定） */
 .review-header img {
   width: 64px;
   height: 64px;
   border-radius: 8px;
   object-fit: cover;
-  flex-shrink: 0;             /* ★これが崩れ防止の本命 */
+  flex-shrink: 0;
 }
 
 .review-meta h3 {
   font-size: 16px;
   font-weight: 700;
+  margin: 0;
 }
 
 .stars {
@@ -524,116 +640,82 @@ section {
   color: #2563eb;
 }
 
-/* 本文 */
 .review-text {
   font-size: 15px;
   color: #4b5b73;
   line-height: 1.8;
-  flex-grow: 1;               /* ★テキスト量が違っても高さが揃う */
 }
 
-/* スタッフ返信トグル */
 .reply-toggle {
   width: 100%;
-  background: #f9fafb; /* 淡い青→無彩色へ */
-  border: 1px solid #d4d7dc; /* 青線→無彩色へ */
-  border-radius: 4px; /* 角丸を小さくして資料感UP */
+  background: #f9fafb;
+  border: 1px solid #d4d7dc;
+  border-radius: 4px;
   padding: 14px 18px;
   cursor: pointer;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  box-shadow: 0 0 24px rgba(15, 23, 42, 0.10); /* 静かな影でカード感UP */
+  box-shadow: 0 0 24px rgba(15, 23, 42, 0.10);
 }
 
-/* 返信本文 */
-.reply-body {
-  margin-top: 12px;
-}
+.reply-body { margin-top: 12px; }
 
 .staff-reply {
-  background: #ffffff; /* 青背景→白カードへ */
-  border-left: 1px solid #4b5563; /* 青線→無彩色の濃いグレーへ */
+  background: #ffffff;
   padding: 18px 20px;
   border-radius: 4px;
+  box-shadow: 0 0 28px rgba(15, 23, 42, 0.12);
+}
 
-  box-shadow: 0 0 28px rgba(15, 23, 42, 0.12); /* 料金表と同じ質感 */
+.staff-reply p {
+  font-size: 14px;
+  color: #4b5b73;
+  margin: 0;
 }
 
 /* =========================================================
-   サイト改変演出
-========================================================= */
-#phaseNotice {
-  position: fixed;
-  top: 45%;
-  left: 0;
-  width: 100%;
-  text-align: center;
-
-  background: rgba(20, 20, 20, 0.72);
-  color: #f1f5f9;
-
-  padding: 18px 0;
-  font-size: 16px;
-  letter-spacing: 0.03em;
-
-  box-shadow: 0 0 40px rgba(75, 74, 74, 0.32);
-
-  opacity: 0;
-  pointer-events: none;
-  z-index: 9999;
-
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-/* =========================================================
-   CTA
+   9. CTA（フォーム）
 ========================================================= */
 .cta {
   padding: 120px 0;
   text-align: center;
 }
 
-.cta-inner {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-
-.cta-title {
-  font-size: 32px;
-  font-weight: 700;
-  margin-bottom: 16px;
-}
+.cta-title { color: #ffffff !important; }
 
 .cta-lead {
   font-size: 18px;
-  color: #4b5b73;
+  color: #cbd5e1;
   margin-bottom: 40px;
 }
 
-/* ============================
-   企業向けフォーム（崩れ防止・余白最適化）
-============================ */
+.form-section {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 40px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+  text-align: left !important;
+  color: #1a2a4a;
+}
 
-/* ラベル＋入力欄を1セットにする */
 .form-field {
   display: flex;
   flex-direction: column;
-  margin-bottom: 18px; /* ★企業フォームの黄金比 */
+  margin-bottom: 18px;
+  text-align: left !important;
 }
 
-/* ラベル */
 .form-field label {
   font-size: 14px;
   font-weight: 600;
   color: #374151;
-  margin-bottom: 6px; /* ★ラベルと入力欄の距離を最適化 */
+  margin-bottom: 6px;
 }
 
-/* 入力欄（左寄せを強制） */
 .form-field input {
   width: 100%;
   padding: 12px 14px;
@@ -641,20 +723,10 @@ section {
   border-radius: 8px;
   font-size: 15px;
   background: #f9fafb;
-  text-align: left !important; /* ★センター寄せを完全に解除 */
   box-sizing: border-box;
   transition: all 0.25s ease;
 }
 
-.form-section,
-#mainForm,
-.form-field,
-.form-field input {
-  text-align: left !important;
-}
-
-
-/* フォーカス時の企業UI演出 */
 .form-field input:focus {
   background: #ffffff;
   border-color: #2563eb;
@@ -662,204 +734,135 @@ section {
   outline: none;
 }
 
-/* フォーム全体の余白を統一 */
-#mainForm {
-  display: flex;
-  flex-direction: column;
-  gap: 0; /* ★ここが大きすぎて崩れていたのでゼロにする */
-}
-
-/* PHASE3追加項目（企業UIに自然統合） */
-#phase3Fields {
-  margin-top: 20px;
-  padding: 20px;
-  background: #f3f4f6;
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
-  margin-bottom: 25px;
-}
-
-.phase3-warning-bar {
-  margin-bottom: 16px;
-  padding: 12px 16px;
-  background: #fff4f4;
-  border-radius: 8px;
-}
-
-.phase3-warning-text {
-  color: #b91c1c;
-  font-weight: 600;
-}
-
-/* 送信ボタン */
 #mainForm button[type="submit"] {
+  width: 100%;
   margin-top: 12px;
   padding: 14px 18px;
-  background: #2563eb;
+  background: linear-gradient(135deg, #0F5675 0%, #1D86A2 30%, #C6DAE0 100%, #4FB7D4 70%);
   color: #ffffff;
   border: none;
   border-radius: 8px;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-}
-
-/* ============================
-   入力欄のセンター寄せを完全解除
-============================ */
-input,
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-input[type="password"],
-textarea {
-  text-align: left !important;
-}
-
-.form-section {
-  max-width: 9000px;
-  margin: 60px auto;
-  padding: 40px;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
-}
-
-.form-block-title {
-  font-size: 22px;
-  font-weight: 700;
-  margin-bottom: 28px;
-  color: #1f2937;
-  border-bottom: 2px solid #2563eb;
-  padding-bottom: 8px;
-}
-
-.form-field {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-bottom: 24px;
-}
-
-.form-field label {
-  font-size: 14px;
-  font-weight: 600;
-  color: #374151;
-}
-
-.form-field input {
-  padding: 14px 16px;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  background: #f9fafb;
-  font-size: 15px;
-  transition: all 0.25s ease;
-}
-
-.form-field input:focus {
-  background: #fff;
-  border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
-  outline: none;
-}
-
-#phase3Fields {
-  padding: 24px;
-  background: #f3f4f6;
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
-  margin-top: 20px;
-}
-
-#mainForm button[type="submit"] {
-  padding: 16px 20px;
-  background: #2563eb;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 17px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.25s ease;
+  transition: all 0.3s ease;
 }
 
 #mainForm button[type="submit"]:hover {
-  background: #1e4fcf;
+  background: linear-gradient(135deg, #18748C 0%, #3FAAC3 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(28,133,162,0.35);
 }
 
-/* PHASE3 追加項目の初期状態（非表示） */
+.input-error {
+  border: 2px solid #ef4444 !important;
+  background: rgba(239, 68, 68, 0.08) !important;
+}
+
+/* =========================================================
+   10. ARG・ギミック演出（サイト改変・解析・PHASE3）
+========================================================= */
+
+/* 異常探知モーダル */
+.anomaly-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.2s ease;
+}
+
+.anomaly-inner {
+  text-align: center;
+  color: #fff;
+}
+
+.anomaly-symbol {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.anomaly-symbol svg {
+  width: 120px;
+  height: 120px;
+}
+
+.anomaly-text {
+  font-size: 15px;
+  color: #ffffff !important;
+  animation: anomalyGlitch 0.7s infinite steps(2, end);
+}
+
+.anomaly-highlight {
+  color: #ff3b3b;
+  text-shadow: 0 0 8px rgba(255, 0, 0, 0.6);
+}
+
+@keyframes anomalyGlitch {
+  0%   { transform: translateX(0); }
+  20%  { transform: translateX(-0.5px); }
+  40%  { transform: translateX(0.8px); }
+  60%  { transform: translateX(-0.3px); }
+  80%  { transform: translateX(0.4px); }
+  100% { transform: translateX(0); }
+}
+
+/* PHASE3 追加フォームエリア */
+#phase3Fields {
+  position: relative;
+  padding: 24px;
+  background: #21252c;
+  border: 1px solid #1e242c;
+  border-radius: 10px;
+  margin-top: 20px;
+  margin-bottom: 25px;
+  box-shadow: 0 0 32px rgba(0,0,0,0.35);
+  color: #e5e7eb;
+}
+
+#phase3Fields::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: #ff3b3b;
+  box-shadow: 0 0 12px rgba(255,0,0,0.4);
+}
+
+#phase3Fields .form-field label {
+  color: #e2e8f0;
+}
+
+#phase3Fields .form-field label::after {
+  content: " — INTERNAL DATA REQUIRED";
+  font-size: 11px;
+  color: #64748b;
+  margin-left: 4px;
+}
+
+#phase3Fields .form-field input {
+  background: #111418;
+  border: 1px solid #2a323c;
+  color: #e5e7eb;
+  font-family: "Consolas", monospace;
+}
+
 #phase3Fields.phase3-hidden {
   display: none !important;
 }
 
-.share-container {
-  width: 100%;
-  text-align: center;
-}
-
-.share-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 240px;
-  padding: 14px 0;
-  border-radius: 6px;
-
-  font-size: 15px;
-  font-weight: 600;
-  color: #1f2937;
-
-  cursor: pointer;
-
-  transition: background 0.25s ease, transform 0.25s ease;
-}
-
-.share-button:hover {
-  transform: translateY(-2px);
-}
-
-
-/* 右下に浮く共有ボタン */
-.floating-share {
-  position: fixed;
-  right: 24px;
-  bottom: 120px;
-  background: rgba(0, 0, 0, 0.55); /* 黒の半透明 */
-  backdrop-filter: blur(6px);
-  padding: 12px 20px;
-  border-radius: 8px;
-  z-index: 9999;
-  display: none; /* 初期は非表示 */
-  box-shadow: 0 0 20px rgba(0,0,0,0.4);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-/* ボタンの文字 */
-.floating-share a {
-  color: #e5e7eb;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-}
-
-/* ホバー時の機械的な反応 */
-.floating-share:hover {
-  transform: translateY(-3px);
-  opacity: 0.9;
-}
-
-/* ============================
-   解析（最新版HTMLに合わせた最適化）
-============================ */
-
-/* 画面全体を覆う黒い解析レイヤー */
+/* 解析演出オーバーレイ */
 .analysis-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.85);
+  background: rgba(0,0,0,0.92);
   backdrop-filter: blur(4px);
   z-index: 99999;
   display: flex;
@@ -867,25 +870,25 @@ textarea {
   align-items: center;
 }
 
-/* 中央の解析ウィンドウ（analysis-window に統一） */
 .analysis-window {
   background: #0a0d11;
   border: 1px solid #1c2128;
-  padding: 40px 60px;
+  padding: 40px;
   border-radius: 8px;
   box-shadow: 0 0 40px rgba(0,0,0,0.5);
-
   text-align: left;
-  max-width: 480px;
-  white-space: pre-line;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
 }
 
-/* ログテキスト */
 #analysisText {
   color: #d0e0ea;
-  font-size: 16px;
+  font-family: "Consolas", monospace;
+  font-size: 15px;
   line-height: 1.8;
   white-space: pre-line;
+  margin: 0;
 }
 
 .analysis-scanline {
@@ -894,39 +897,64 @@ textarea {
   left: 0;
   height: 2px;
   width: 100%;
-  background: linear-gradient(
-    to right,
-    rgba(255,255,255,0) 0%,
-    rgba(77,208,225,0.8) 50%,
-    rgba(255,255,255,0) 100%
-  );
+  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(77,208,225,0.8) 50%, rgba(255,255,255,0) 100%);
   animation: scanlineMove 1.4s linear infinite;
 }
 
 @keyframes scanlineMove {
   0% { transform: translateY(0); }
-  100% { transform: translateY(100%); }
+  100% { transform: translateY(100vh); }
 }
 
-/* ============================
-   フッター
-============================ */
+/* PHASE4 共有カード */
+.floating-share-card {
+  position: fixed;
+  right: 24px;
+  bottom: 20px;
+  background: #2b2e35;
+  border: 1px solid #2a3038;
+  border-radius: 8px;
+  padding: 18px 20px;
+  width: 260px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.45);
+  z-index: 9999;
+  display: none;
+}
+
+.floating-share-text {
+  color: #e5e9f0;
+  font-size: 13px;
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+
+.floating-share-button {
+  display: block;
+  text-align: center;
+  padding: 12px 0;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid #3a3f47;
+  border-radius: 6px;
+  color: #e5e7eb;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.floating-share-button:hover {
+  background: rgba(255,255,255,0.16);
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   11. フッター
+========================================================= */
 footer {
   width: 100%;
   background: #f8fafc;
   border-top: 1px solid rgba(0, 0, 0, 0.08);
-  padding: 32px 0; /* 上下だけ余白 */
-}
-
-.footer-inner {
-  max-width: 960px;      /* ← ヘッダーと同じ幅に揃える */
-  margin: 0 auto;        /* ← 中央寄せ */
-  padding: 0 24px;       /* ← 左右の余白（壊れない） */
-
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
-  column-gap: 24px;
+  padding: 32px 0;
 }
 
 .footer-left {
@@ -936,73 +964,30 @@ footer {
   line-height: 1.7;
 }
 
-#resetPhase {
-  padding: 10px 20px;
-  background: #ffffff;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
-  color: #334155;
-  font-size: 13px;
-  cursor: pointer;
-}
-
-/* SP時は縦並び */
-@media (max-width: 600px) {
-  .footer-inner {
-    grid-template-columns: 1fr; /* ← 1カラムに戻す */
-    text-align: center;
-    row-gap: 16px;
-    padding: 0 20px;
+@media (max-width: 768px) {
+  .service-inner {
+    padding: 40px 20px !important;
+    border-radius: 16px;
   }
-
-  .footer-left {
-    text-align: center;
+  .stats-container { gap: 12px; }
+  .stat-card {
+    flex: 1 1 30%;
+    min-width: 90px;
+    padding: 16px 8px;
   }
-
-  #resetPhase {
-    width: 100%;
-    max-width: 260px;
-    margin: 0 auto;
-  }
+  .stat-number { font-size: 26px; }
+  .stat-unit { font-size: 14px; }
+  .stat-label { font-size: 11px; }
+  .footer-inner, .footer-left { text-align: center; }
 }
 
-
-/* =========================================================
-   演出②
-========================================================= */
-#analysisOverlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.4);
-  backdrop-filter: blur(2px);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
+.review-item .anomaly-text,
+.review-item .review-text {
+  color: #1a2a4a !important; /* 濃い紺色にしてはっきり読めるようにする */
+  opacity: 1 !important;
 }
 
-#analysisWindow {
-  width: 80%;
-  max-width: 600px;
-  height: 260px;
-  background: #0a0a0a;
-  border: 1px solid #333;
-  box-shadow: 0 0 20px rgba(0,0,0,0.6);
-  padding: 20px;
-  overflow: hidden;
-  position: relative;
-}
-
-#analysisLog {
-  color: #e5e5e5;
-  font-family: "Consolas", "Menlo", monospace;
-  font-size: 13px;
-  line-height: 1.4;
-  white-space: pre-wrap;
-}
-
-/* ノイズフェードアウト */
-@keyframes analysisFadeOut {
-  0% { opacity: 1; filter: none; }
-  100% { opacity: 0; filter: blur(6px) brightness(0.4); }
+#analysisOverlay,
+#analysisText {
+  font-family: "Noto Serif JP", "Hedvig Letters Serif", serif !important;
 }

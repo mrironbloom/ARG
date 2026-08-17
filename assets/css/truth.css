@@ -1,21 +1,24 @@
 /* ============================
    全体（PC）
 ============================ */
+body {
+  font-family: "Hedvig Letters Serif", "Noto Serif JP", serif;
+}
+
 .doc-body {
-  background: #f4f5f7;
-  font-family: "Noto Sans JP", sans-serif;
-  color: #1a1d21;
+  background: #16181d; /* 黒より少し明るい研究グレー */
+  font-family: "Hedvig Letters Serif", "Noto Serif JP", serif;
+  color: #e9edf3;      /* 明るめの灰白 */
   padding: 40px 0;
 }
 
 .doc-container {
-  background: #ffffff;
+  background: #292b30; /* 黒より明るい青みグレー */
   width: 900px;
   margin: 0 auto;
   padding: 40px 60px;
-  border: 1px solid #d4d7dc;
-  box-shadow: 0 0 40px rgba(0,0,0,0.08);
-  box-sizing: border-box;
+  border: 1px solid #2a3038;
+  box-shadow: 0 0 40px rgba(0,0,0,0.35);
 }
 
 /* ============================
@@ -46,7 +49,7 @@
 
 .doc-divider {
   border: none;
-  border-top: 1px solid #d4d7dc;
+  border-top: 1px solid #3a4048;
   margin: 30px 0;
 }
 
@@ -61,11 +64,26 @@
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 12px;
+  color: #e9e9e9; /* 少し明るい赤 */
+  text-shadow: 0 0 4px rgba(255,0,0,0.25); /* 発光弱め */
+  letter-spacing: 0.04em;
 }
 
 .doc-section p {
   font-size: 15px;
   line-height: 1.9;
+  color: #e5e9f0; /* 明るい灰白 */
+}
+
+.doc-section img {
+  width: 100%;
+  max-width: 900px; /* ★PC時の最適幅（レイアウトにぴったり） */
+  height: auto;
+  display: block;
+  margin: 40px auto;
+  border-radius: 6px;
+  border: 1px solid #2a3038;
+  box-shadow: 0 0 22px rgba(0,0,0,0.35);
 }
 
 /* ============================
@@ -74,6 +92,7 @@
 .shake-word {
   display: inline-block;
   animation: shakeWord 0.35s infinite alternate;
+  color: #b91a1a;
 }
 
 @keyframes shakeWord {
@@ -87,21 +106,23 @@
 .doc-observe-block {
   margin: 40px 0;
   padding: 24px 28px;
-  background: #fafbfc;
-  border: 1px solid #e1e4e8;
+  background: #26292c; /* 黒より明るい研究グレー */
+  border: 1px solid #2f353d;
   border-radius: 4px;
+  color: #e5e9f0;
 }
 
 .doc-observe-list p {
   margin: 10px 0;
   font-size: 15px;
-  color: #1f2937;
+  color: #e5e9f0;
   line-height: 1.8;
 }
 
 .doc-analysis-clean {
   margin-top: 24px;
   padding: 0 4px;
+  color: rgb(185, 26, 26) !important;
 }
 
 .doc-analysis-clean p {
@@ -140,6 +161,7 @@
 
 .doc-section .tv-noise-text .double-layer {
   font-size: 18px;
+  color: rgb(185, 26, 26);
 }
 
 .double-layer::after {
@@ -172,13 +194,13 @@
 
 .terms-number {
   font-weight: bold;
-  color: #555;
+  color: #cfd3da;
   min-width: 60px;
 }
 
 .terms-text {
   flex: 1;
-  color: #222;
+  color: #e5e9f0;
 }
 
 /* ============================
@@ -188,24 +210,10 @@
   position: relative;
 }
 
-
 @keyframes autofill {
   0% { opacity: 0; }
   80% { opacity: 0; }
   100% { opacity: 1; }
-}
-
-/* ============================
-   ボタン（PC）
-============================ */
-.arg-button {
-  margin-top: 20px;
-  padding: 12px 24px;
-  background: #222;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
 }
 
 /* ============================
@@ -341,6 +349,12 @@
     padding: 14px 0 !important;
     font-size: 16px !important;
   }
+
+  .report-share-button {
+    width: 100% !important;
+    padding: 14px 0 !important;
+    font-size: 16px !important;
+  }
 }
 
 /* ============================
@@ -410,6 +424,7 @@
   z-index: 999999;
   pointer-events: none;
 }
+
 @keyframes glitchLine {
   0% { opacity: 0; }
   20% { opacity: 1; transform: translateX(-10px); }
@@ -428,4 +443,74 @@
   opacity: 0;
   z-index: 999999;
   pointer-events: none;
+}
+
+/* =========================================================
+   サービス開始ボタン
+========================================================= */
+
+.report-share-block {
+  margin: 24px 0 32px;
+  text-align: center;
+}
+
+.arg-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: inherit; /* ★親要素のフォント（Noto Serif / Hedvig）を強制的につぐ指定 */
+
+  padding: 12px 26px;
+  background: rgba(255, 255, 255, 0.08); /* 半透明の灰白 */
+  border: 1px solid #3a3f47;
+  border-radius: 6px;
+
+  color: #e5e7eb;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  text-decoration: none;
+
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.arg-button:hover {
+  background: rgba(255, 255, 255, 0.16);
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   X共有ボタン（調査を報告）
+========================================================= */
+
+.report-share-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: inherit; /* ★念のためこちらもフォント継承を設定 */
+
+  padding: 12px 26px;
+  background: rgba(245, 245, 245, 0.808); /* 半透明の灰白 */
+  border: 1px solid #3a3f47;
+  border-radius: 6px;
+
+  color: #353535;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  text-decoration: none;
+
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.report-share-button:hover {
+  background: rgb(255, 255, 255);
+  transform: translateY(-2px);
 }

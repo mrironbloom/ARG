@@ -2,7 +2,7 @@
    Base（無機質・退廃・研究端末）
 ============================ */
 body {
-  font-family: "Noto Sans JP", sans-serif;
+  font-family: "Noto Serif JP", "Hedvig Letters Serif", serif;
   background: #1A1A1A;
   color: #E6E6E6;
   margin: 0;
@@ -111,14 +111,14 @@ body {
 }
 
 /* ============================
-   System Log（端末ログ）
+   System Log（端末ログ・JS動的書き出し部分含む）
 ============================ */
 .system-log {
   background: #000;
   color: #CFCFCF;
   padding: 16px;
   border-radius: 0;
-  font-family: monospace;
+  font-family: "Noto Serif JP", "Hedvig Letters Serif", serif;
   font-size: 12px;
   line-height: 1.6;
   margin-top: 16px;
@@ -280,6 +280,7 @@ body {
   opacity: 0;
   transition: opacity 0.4s ease;
   letter-spacing: 0.5px;
+  font-family: "Noto Serif JP", "Hedvig Letters Serif", serif;
 }
 
 .phase2-alert.show {
@@ -325,6 +326,7 @@ body {
   overflow: hidden;
   text-align: center;
   transition: background 0.2s ease, border-color 0.2s ease;
+  font-family: "Noto Serif JP", "Hedvig Letters Serif", serif;
 }
 
 .terminal-command-btn:hover {
@@ -353,4 +355,3 @@ body {
 .terminal-command-btn:active {
   filter: contrast(140%) brightness(120%);
 }
-

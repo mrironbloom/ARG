@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>オフライン | TOPページ</title>
   <link rel="stylesheet" href="assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Hedvig+Letters+Serif:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -12,22 +13,67 @@
   <!-- ============================
        Header
   ============================ -->
-  <header class="header">
-    <div class="header-left">
-      <img
-      src="assets/images/offline-logo.png" alt="欠席代行サービス「オフライン」" class="header-logo">
+ <header class="global-header">
+    <div class="global-header-inner">
+
+      <!-- ロゴ -->
+      <div class="gh-logo-wrap">
+        <a href="#hero" class="gh-logo-link">
+          <img src="assets/images/offline-logo.png" alt="オフライン" class="gh-logo">
+        </a>
+      </div>
+
+      <!-- PCナビ -->
+      <nav class="gh-nav">
+        <a href="#hero">TOP</a>
+        <a href="#service">ABOUT</a>
+        <a href="#scenes">SCENES</a>
+        <a href="#features">FEATURES</a>
+        <a href="#price">PRICE</a>
+        <a href="#reviews">REVIEWS</a>
+        <a href="#cta">FORM</a>
+      </nav>
+
+      <!-- 右端アクションエリア -->
+      <div class="gh-action-area">
+        <a id="resetPhase" class="gh-reset-btn">調査を最初から</a>
+
+        <!-- SPハンバーガーボタン -->
+        <button class="gh-hamburger" id="ghHamburger" aria-label="メニューを開く">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
     </div>
 
-    <div id="staffStatus" aria-live="polite">担当スタッフ：準備中</div>
+    <!-- SPナビ（ドロップダウン） -->
+    <nav class="gh-nav-mobile" id="ghNavMobile">
+      <a href="#hero">TOP</a>
+      <a href="#service">ABOUT</a>
+      <a href="#scenes">SCENES</a>
+      <a href="#features">FEATURES</a>
+      <a href="#price">PRICE</a>
+      <a href="#reviews">REVIEWS</a>
+      <a href="#cta">FORM</a>
+    </nav>
   </header>
 
 
   <!-- ============================
        HERO
   ============================ -->
-  <section class="hero">
+  <section class="hero" id="hero">
     <div class="hero-overlay">
       <div class="hero-inner">
+        
+        <!-- ★ 追加: 信頼実績バッジ -->
+        <div class="hero-badges">
+          <span class="hero-badge">✦ 秘密厳守・24時間代行受付</span>
+          <span class="hero-badge">累計対応実績 5,000件突破</span>
+        </div>
+
         <h1>忙しいあなたに、安心できる欠席を</h1>
 
         <p class="hero-sub">
@@ -42,9 +88,9 @@
     <!-- ============================
          サービス説明
     ============================ -->
-    <section class="service">
+    <section class="service" id="service">
       <div class="service-inner">
-
+        <p class="section-en">ABOUT</p>
         <h2 class="service-title">オフラインについて</h2>
 
         <p class="service-lead">
@@ -65,12 +111,14 @@
     </section>
 
 
+
     <!-- ============================
          利用シーン
     ============================ -->
+    <section id="scenes"></section>
     <section class="scenes">
       <div class="scenes-inner">
-
+        <p class="section-en">SCENES</p>
         <h2 class="scenes-title">利用シーン</h2>
 
         <div class="scenes-grid">
@@ -99,9 +147,9 @@
     <!-- ============================
          特徴
     ============================ -->
-    <section class="features">
+    <section class="features" id="features">
       <div class="features-inner">
-
+        <p class="section-en">FEATURES</p>
         <h2 class="features-title">特徴</h2>
 
         <div class="features-grid">
@@ -133,9 +181,9 @@
     <!-- ============================
          料金
     ============================ -->
-    <section class="price">
+    <section class="price" id="price">
       <div class="price-inner">
-
+        <p class="section-en">PRICE</p>
         <h2 class="price-title">料金</h2>
 
         <table class="price-table">
@@ -168,9 +216,9 @@
     <!-- ============================
          お客様の声
     ============================ -->
-    <section class="reviews">
+    <section class="reviews" id="reviews">
       <div class="reviews-inner">
-
+        <p class="section-en">REVIEWS</p>
         <h2 class="reviews-title">お客様の声</h2>
 
         <div class="review-list">
@@ -195,9 +243,6 @@
 
             <div class="reply-body" hidden>
               <div class="staff-reply">
-                <div class="staff-reply-label">
-                  <span class="staff-icon">👤</span> スタッフ
-                </div>
                 <p>ご利用ありがとうございました。安心してお休みいただけたようで嬉しく思います。</p>
               </div>
             </div>
@@ -223,9 +268,6 @@
 
             <div class="reply-body" hidden>
               <div class="staff-reply">
-                <div class="staff-reply-label">
-                  <span class="staff-icon">👤</span> スタッフ
-                </div>
                 <p>ご利用ありがとうございました。今後も丁寧なサポートを心がけてまいります。</p>
               </div>
             </div>
@@ -240,7 +282,7 @@
               </div>
             </div>
 
-            <p class="review-text">
+            <p class="review-text anomaly-text">
               昨日は休んでいたはずなのに、同僚から「昨日話したじゃん」と言われました。
             </p>
 
@@ -251,12 +293,9 @@
 
             <div class="reply-body" hidden>
               <div class="staff-reply">
-                <div class="staff-reply-label">
-                  <span class="staff-icon">👤</span> スタッフ
-                </div>
                 <p>
                   <a href="#" id="contractAlertLink" class="contract-alert-link">
-                    ご契約内容とは異なる対応が実施された可能性があります。現在確認しております。
+                    ご契約内容とは異なる対応が実施された可能性があります。現在確認中です。
                   </a>
                 </p>
               </div>
@@ -268,121 +307,135 @@
       </div>
     </section>
 
-    <div id="phaseNotice">サイトが改変されました。</div>
+    <!-- 異常探知モーダル -->
+    <div id="phaseNotice" class="anomaly-overlay">
+      <div class="anomaly-inner">
+        <div class="anomaly-symbol">
+          <svg xmlns="http://www.w3.org/2000/svg" width="506.611" height="570.909" viewBox="0 0 506.611 570.909">
+            <path id="合体_13" data-name="合体 13" d="M911.769-67.432v-448.2L972.611-576V-5.091ZM466-576l60.841,60.372v448.2L466-5.091ZM830.31-133.107v-54.061c0-34.284,24.6-51.425,24.6-93.62s-24.6-59.337-24.6-93.62v-58.018l66.019-64.611V-69.815ZM542.282-497.037,608.3-432.427v58.018c0,34.284-24.6,51.425-24.6,93.62s24.6,59.337,24.6,93.62v54.061L542.282-69.815Zm79.936,216.413c55.664-15.534,88.027-51.779,97.088-103.557,9.061,51.779,41.424,88.024,97.088,103.557-55.664,15.535-88.027,51.78-97.088,103.558C710.244-228.845,677.882-265.09,622.218-280.624Z" transform="translate(-466 576)" fill="#fff"/>
+          </svg>
+        </div>
+        <p class="anomaly-text">
+          異常を<span class="anomaly-highlight">探知</span>しました
+        </p>
+      </div>
+    </div>
 
     <!-- ============================
          CTA
     ============================ -->
-<section class="cta">
-  <div class="cta-inner">
+    <section class="cta" id="cta">
+      <div class="cta-inner">
+        <p class="section-en">FORM</p>
+        <h2 class="cta-title">ご利用フォーム</h2>
+        <p class="cta-lead">下記をご入力下さい</p>
 
-    <h2 class="cta-title">ご利用フォーム</h2>
-    <p class="cta-lead">下記をご入力下さい</p>
+        <div class="form-section">
+          <form id="mainForm">
 
-    <div class="form-section">
-      <form id="mainForm">
+            <!-- 氏名（漢字） -->
+            <div class="form-field">
+              <label>氏名（漢字）</label>
+              <input type="text" required>
+            </div>
 
-        <!-- 氏名（漢字） -->
-        <div class="form-field">
-          <label>氏名（漢字）</label>
-          <input type="text">
+            <!-- 氏名（フリガナ） -->
+            <div class="form-field">
+              <label>氏名（フリガナ）</label>
+              <input type="text" required>
+            </div>
+
+            <!-- メールアドレス -->
+            <div class="form-field">
+              <label>メールアドレス</label>
+              <input type="email" required>
+            </div>
+
+            <!-- 電話番号 -->
+            <div class="form-field">
+              <label>電話番号</label>
+              <input type="tel" required>
+            </div>
+
+            <!-- PHASE3 追加項目 -->
+            <div id="phase3Fields" class="phase3-hidden">
+
+              <div class="form-field">
+                <label>普段の話し方</label>
+                <input type="text" required>
+              </div>
+
+              <div class="form-field">
+                <label>よく使う言葉</label>
+                <input type="text" required>
+              </div>
+
+              <div class="form-field">
+                <label>仲の良い人</label>
+                <input type="text" required>
+              </div>
+
+              <div class="form-field">
+                <label>最近あった出来事</label>
+                <input type="text" required>
+              </div>
+
+              <div class="form-field">
+                <label>休日の過ごし方</label>
+                <input type="text" required>
+              </div>
+
+            </div>
+
+            <button type="submit">送信</button>
+
+          </form>
         </div>
 
-        <!-- 氏名（フリガナ） -->
-        <div class="form-field">
-          <label>氏名（フリガナ）</label>
-          <input type="text">
-        </div>
+      </div>
+    </section>
 
-        <!-- メールアドレス -->
-        <div class="form-field">
-          <label>メールアドレス</label>
-          <input type="email">
-        </div>
-
-        <!-- 電話番号 -->
-        <div class="form-field">
-          <label>電話番号</label>
-          <input type="tel">
-        </div>
-
-        <!-- PHASE3 追加項目 -->
-        <div id="phase3Fields" class="phase3-hidden">
-
-          <div class="form-field">
-            <label>普段の話し方</label>
-            <input type="text">
-          </div>
-
-          <div class="form-field">
-            <label>よく使う言葉</label>
-            <input type="text">
-          </div>
-
-          <div class="form-field">
-            <label>仲の良い人</label>
-            <input type="text">
-          </div>
-
-          <div class="form-field">
-            <label>最近あった出来事</label>
-            <input type="text">
-          </div>
-
-          <div class="form-field">
-            <label>休日の過ごし方</label>
-            <input type="text">
-          </div>
-
-        </div>
-
-        <button type="submit">送信</button>
-
-      </form>
+    <!-- 解析演出用オーバーレイ -->
+    <div id="analysisOverlay" class="analysis-overlay" style="display:none;">
+      <div class="analysis-scanline"></div>
+      <div class="analysis-window">
+        <p id="analysisText"></p>
+      </div>
     </div>
-
-  </div>
-</section>
-
-<div id="analysisOverlay" class="analysis-overlay" style="display:none;">
-  <div class="analysis-scanline"></div>
-  <div class="analysis-window">
-
-    <!-- ログを積み上げる場所 -->
-    <p id="analysisText"></p>
-
-  </div>
-</div>
 
   </div> <!-- ★ content-gradient の閉じタグ -->
 
 
-<div id="floatingShare" class="floating-share">
-  <a
-    href="https://twitter.com/intent/tweet?"
-    target="_blank" class="share-button">
-    担当スタッフが稼働しております。このサービスを必要としている方へXで共有してみませんか？
-  </a>
-</div>
+  <!-- 右下共有ボタン -->
+  <div id="floatingShare" class="floating-share-card">
+    <p class="floating-share-text">
+      担当スタッフが稼働しております。<br>
+      このサービスを必要としている方へ共有しませんか？
+    </p>
 
-
+    <a
+      href="https://twitter.com/intent/tweet"
+      target="_blank"
+      class="floating-share-button"
+    >
+      調査を報告
+    </a>
+  </div>
 
 
   <!-- ============================
        Footer
   ============================ -->
-<footer>
-  <div class="footer-inner">
-    <div class="footer-left">
-      このWebサイトの内容は考察コンテンツのために作られたフィクションであり、  
-      実在の人物・団体とは一切関係がありません。  
-      <br>
-      © 2026 真相保管庫＜アーカイブ・ゼロ＞
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-left">
+        このWebサイトの内容は考察コンテンツのために作られたフィクションであり、  
+        実在の人物・団体とは一切関係がありません。  
+        <br>
+        © 2026 真相保管庫＜アーカイブ・ゼロ＞
+      </div>
     </div>
-
-    <div id="resetPhase">状態をリセットする</div>
-  </div>
-</footer>
+  </footer>
 
   <script src="assets/js/script.js"></script>
 
