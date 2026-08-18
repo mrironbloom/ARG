@@ -187,8 +187,25 @@ document.addEventListener("DOMContentLoaded", () => {
         officeImg.style.cursor = "pointer";
 
         officeImg.addEventListener("click", () => {
-          localStorage.setItem("offlineBackFlag", "returnToForm");
-          window.location.href = "material.html";
+          // 1. クリックされた瞬間に画面全体の操作を即座にブロック
+          document.body.style.pointerEvents = "none";
+          document.body.style.cursor = "wait";
+
+          const notice = document.getElementById("phaseNotice");
+
+          if (notice) {
+            // 2. 異常探知モーダルを表示（pointerEventsを1つ上で遮断しているので表示だけでOK）
+            notice.style.opacity = "1";
+
+            // 3. 0.3秒後にページ移動
+            setTimeout(() => {
+              localStorage.setItem("offlineBackFlag", "returnToForm");
+              window.location.href = "material.html";
+            }, 2500);
+          } else {
+            localStorage.setItem("offlineBackFlag", "returnToForm");
+            window.location.href = "material.html";
+          }
         });
       }
     });

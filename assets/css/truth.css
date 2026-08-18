@@ -355,6 +355,22 @@ body {
     padding: 14px 0 !important;
     font-size: 16px !important;
   }
+
+  .report-share-block {
+    margin: 20px 0 28px !important;
+    gap: 12px !important;
+    padding: 0 8px !important;
+  }
+
+.arg-button,
+.report-share-button {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 14px 16px !important; /* 内部のテキスト溢れを防ぐため左右余白を設定 */
+    font-size: 15px !important;
+    text-align: center !important;
+  }
 }
 
 /* ============================
@@ -451,7 +467,13 @@ body {
 
 .report-share-block {
   margin: 24px 0 32px;
-  text-align: center;
+  display: flex;
+  flex-direction: row; /* 横並びに変更 */
+  justify-content: center; /* 中央寄せ */
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .arg-button {
@@ -513,4 +535,143 @@ body {
 .report-share-button:hover {
   background: rgb(255, 255, 255);
   transform: translateY(-2px);
+}
+
+/* =========================================================
+   ボタンのレイアウト統一（全画面サイズ対応）
+========================================================= */
+
+/* --- 601px以上のPC・タブレット表示時 --- */
+.report-share-block {
+  display: flex !important;
+  flex-direction: row !important; /* 横並び */
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 16px !important;
+  margin: 24px 0 32px !important;
+}
+
+.report-share-block .report-share-button,
+.report-share-block .arg-button {
+  display: inline-flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  
+  /* ★ここを修正：固定幅を指定します（例: 240px） */
+  width: 240px !important;
+  max-width: 240px !important;
+  min-width: 240px !important;
+  
+  padding: 12px 0 !important; /* 左右のpaddingを0にして幅固定を優先 */
+  box-sizing: border-box !important;
+}
+
+/* 変更後：600px以下のスマホ時のみ縦並び（全幅）にする */
+@media (max-width: 600px) {
+  .report-share-block {
+    flex-direction: column !important;
+    width: 100% !important;
+    padding: 0 !important;
+    gap: 12px !important;
+  }
+
+  .report-share-block .report-share-button,
+  .report-share-block .arg-button {
+    display: flex !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 14px 16px !important;
+    box-sizing: border-box !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .doc-section .tv-noise-text .double-layer {
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    line-height: 1.5 !important;
+    margin: 12px 0 !important;
+  }
+
+  /* 文字が大きくなった分、影（残像）の位置を微調整 */
+  .double-layer::after {
+    transform: translateY(2px) !important;
+  }
+}
+
+/* ============================
+   解析オーバーレイ・ログ画面
+============================ */
+#analysisLog {
+  /* ▼ ここで文字サイズを調整（お好みの大きさに変更してください） */
+  font-size: 15px; 
+  
+  /* 行間を少し広げるとサイバー/ホラー感が増して読みやすくなります */
+  line-height: 2; 
+  
+  /* 文字間隔を広げたい場合はこちら */
+  letter-spacing: 0.05em; 
+}
+
+/* スマホ表示時に文字が大きすぎて画面から溢れるのを防ぐ調整 */
+@media (max-width: 600px) {
+  #analysisLog {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+}
+
+/* =========================================================
+   解析オーバーレイ ＆ モーダルウィンドウ
+========================================================= */
+
+/* ウィンドウ全体（黒いターミナル風カード） */
+#analysisWindow {
+  background: rgba(18, 20, 24, 0.95) !important;
+  border: 1px solid #3a4048 !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 15px rgba(0, 0, 0, 0.5) !important;
+  padding: 32px 28px !important;
+  border-radius: 8px;
+  text-align: left;
+  width: 90%;
+  max-width: 480px;
+  box-sizing: border-box !important;
+}
+
+/* ログを表示するpreタグの初期化と装飾 */
+#analysisLog {
+  font-family: "Consolas", "Courier New", "Hedvig Letters Serif", "Noto Serif JP", serif !important;
+  font-size: 13px !important;
+  line-height: 2.0 !important;
+  letter-spacing: 0.05em !important;
+  color: #c5d1de !important;
+  margin: 0 !important;
+  white-space: pre-wrap !important;     /* 長い行の折り返し対応 */
+  word-break: break-word !important;   /* 単語途中でもみ出しを防ぐ */
+}
+
+/* ログ内の不穏なテキスト強調クラス */
+.log-warn {
+  color: #ff3b3b !important;
+  font-weight: 600;
+}
+
+.log-alert {
+  color: #b91a1a !important;
+  font-weight: bold;
+}
+
+/* ★ SP（スマホ）表示時の左右余白 ＆ サイズ微調整 */
+@media (max-width: 600px) {
+  #analysisWindow {
+    width: 88% !important;               /* 画面両端との間に十分な余白を確保 */
+    padding: 24px 18px !important;       /* 枠の内側の左右余白を調整 */
+    margin: 0 auto !important;
+  }
+
+  #analysisLog {
+    font-size: 11px !important;          /* スマホで文字が折り返されすぎない最適サイズ */
+    line-height: 1.8 !important;
+    letter-spacing: 0.03em !important;
+  }
 }

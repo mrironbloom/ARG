@@ -40,21 +40,29 @@ function startAnalysis() {
   const overlay = document.getElementById("analysisOverlay");
   const logBox = document.getElementById("analysisLog");
 
-  // JS側からもフォント（Hedvig Letters Serif / Noto Serif JP）を明示的に指定
-  if (logBox) {
-    logBox.style.fontFamily = '"Hedvig Letters Serif", "Noto Serif JP", serif';
-  }
+  if (!overlay || !logBox) return;
 
   overlay.style.display = "flex";
-  logBox.textContent = "";
+  logBox.innerHTML = "";
 
   let i = 0;
 
   function showNext() {
     if (i < logs.length) {
-      logBox.textContent += logs[i] + "\n";
+      let currentLine = logs[i];
+
+      // ログの特定ワードを検出してスタイリング（赤字・揺れ）
+      if (currentLine.includes("UNSTABLE")) {
+        currentLine = currentLine.replace("UNSTABLE", '<span class="log-warn">UNSTABLE</span>');
+      } else if (currentLine.includes("BYPASSED")) {
+        currentLine = currentLine.replace("BYPASSED", '<span class="log-warn">BYPASSED</span>');
+      } else if (currentLine.includes("STARTING SERVICE...")) {
+        currentLine = '<span class="log-alert shake-word">' + currentLine + '</span>';
+      }
+
+      logBox.innerHTML += currentLine + "<br>";
       i++;
-      setTimeout(showNext, 80 + Math.random() * 120); // 高速＆揺らぎ
+      setTimeout(showNext, 90 + Math.random() * 110); // テンポよく表示
     } else {
       // ▼ ① 解析ウィンドウのフェードアウト
       setTimeout(() => {
@@ -65,7 +73,7 @@ function startAnalysis() {
         setTimeout(() => {
           proceedToNextPhase();
         }, 600);
-      }, 800);
+      }, 1000);
     }
   }
 

@@ -259,6 +259,9 @@ body {
   transform: translate(-1px, 0);
 }
 
+.manual-list li{
+  font-size: 14px;
+}
 /* ============================
    PHASE2：画像破損
 ============================ */
@@ -354,4 +357,72 @@ body {
 /* クリック時のノイズ演出 */
 .terminal-command-btn:active {
   filter: contrast(140%) brightness(120%);
+}
+
+/* ============================
+   レスポンシブ対応 (SP表示調整)
+============================ */
+@media screen and (max-width: 768px) {
+
+  /* 画面全体の余白調整 */
+  body {
+    padding: 16px 12px;
+  }
+
+  .material-section,
+  .compare-rich {
+    padding: 20px 16px;
+    margin-top: 24px;
+  }
+
+  /* 照合比較エリア：レイアウトの組み替え */
+  .compare-rich-wrapper {
+    display: flex;
+    flex-direction: column; /* 縦並びに変更 */
+    gap: 16px;
+  }
+
+  /* 2枚の写真を横並び（2列）にするためのコンテナ */
+  .compare-rich-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 写真2枚を並べる */
+    gap: 12px;
+  }
+
+  /* 中央の適合率パネルを下に全幅で配置 */
+  .compare-center {
+    grid-column: 1 / -1; /* 1列目から最後まで繋げる */
+    order: 3;            /* 写真の後に配置 */
+    padding: 14px 0;
+  }
+
+  .compare-rate {
+    font-size: 28px;     /* スマホ用に文字サイズ調整 */
+  }
+
+  /* 写真パネルのラベル位置微調整 */
+  .panel-label {
+    font-size: 9px;
+    padding: 1px 4px;
+    top: -10px;
+  }
+
+  .compare-panel {
+    padding: 8px; /* パディングを詰めて写真を最大化 */
+  }
+
+  /* テーブル（データ管理）がはみ出ないように横スクロール可能に */
+  .material-section:has(.material-table) {
+    overflow-x: auto;
+  }
+
+  .material-table {
+    min-width: 300px;
+  }
+
+  .material-table th,
+  .material-table td {
+    padding: 8px 6px;
+    font-size: 11px;
+  }
 }

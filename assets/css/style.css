@@ -136,7 +136,7 @@ section {
 }
 
 /* スマホ表示 (768px 以下) */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 840px) {
   .global-header-inner {
     padding: 10px 16px;
   }
@@ -538,12 +538,14 @@ section {
   .scenes-grid,
   .features-grid {
     flex-direction: column;
+    align-items: center;
     gap: 24px;
   }
   .scene-item,
   .feature-item {
     width: 100%;
-    max-width: 400px;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 }
 
@@ -672,6 +674,10 @@ section {
   font-size: 14px;
   color: #4b5b73;
   margin: 0;
+}
+
+.review-item #memory-gap{
+  color: #ff3b3b !important;
 }
 
 /* =========================================================
@@ -870,40 +876,84 @@ section {
   align-items: center;
 }
 
+/* 解析演出ウィンドウ全体を強化 */
 .analysis-window {
-  background: #0a0d11;
-  border: 1px solid #1c2128;
-  padding: 40px;
+  background: rgba(10, 13, 17, 0.95) !important;
+  /* ネオン風のサイバーな青い発光枠線 */
+  border: 1px solid #00f0ff !important;
+  box-shadow: 0 0 30px rgba(0, 240, 255, 0.3), inset 0 0 15px rgba(0, 240, 255, 0.1) !important;
+  padding: 40px 30px 30px !important;
   border-radius: 8px;
-  box-shadow: 0 0 40px rgba(0,0,0,0.5);
+  text-align: left;
+  width: 90%;
+  max-width: 520px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 解析演出ウィンドウ全体 */
+.analysis-window {
+  background: #14171c !important; /* 深みのある暗いグレー */
+  border: 1px solid #333942 !important; /* 落ち着いたダークグレーの枠線 */
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8) !important; /* 重厚感のあるシャドウ */
+  padding: 42px 30px 28px !important;
+  border-radius: 6px;
   text-align: left;
   width: 90%;
   max-width: 500px;
   position: relative;
+  overflow: hidden;
 }
 
-#analysisText {
-  color: #d0e0ea;
+/* 上部の静かなヘッダーバー */
+.analysis-window::before {
+  content: "SYSTEM :: ANALYSIS LOG";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 26px;
+  background: #1d222a;
+  border-bottom: 1px solid #2e3440;
+  color: #7a8494; /* 控えめなグレー */
   font-family: "Consolas", monospace;
-  font-size: 15px;
-  line-height: 1.8;
-  white-space: pre-line;
-  margin: 0;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  line-height: 26px;
+  padding-left: 14px;
+  box-sizing: border-box;
 }
 
+@media (max-width: 600px) {
+  .analysis-window {
+    width: 86% !important;
+    margin: 0 16px !important;
+  }
+}
+
+/* ログテキスト（落ち着いたペールブルー〜灰白） */
+#analysisText {
+  color: #c5d1de !important; /* 明度を落とした上品な灰白 */
+  font-family: "Consolas", "Courier New", monospace !important;
+  font-size: 14px;
+  line-height: 2.1;
+  white-space: pre-line;
+  margin-top: 8px;
+  text-shadow: none !important; /* 発光（グロー）をオフにして目に優しく */
+}
+
+/* スキャンライン（静かで細い走査線） */
 .analysis-scanline {
   position: absolute;
   top: 0;
   left: 0;
-  height: 2px;
+  height: 1px;
   width: 100%;
-  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(77,208,225,0.8) 50%, rgba(255,255,255,0) 100%);
-  animation: scanlineMove 1.4s linear infinite;
-}
-
-@keyframes scanlineMove {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(100vh); }
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.15), transparent) !important;
+  box-shadow: none !important;
+  animation: scanlineMove 2.2s linear infinite;
+  z-index: 10;
+  pointer-events: none;
 }
 
 /* PHASE4 共有カード */
